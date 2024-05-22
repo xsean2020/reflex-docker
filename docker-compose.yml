@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  go-dev:
+    # building image from ./Dockerfile, and change network mode to 'host', because 'go get' need proxy in Dockerfile
+    build:
+      context: .
+    # specify the image name after builded
+    image: go-docker-dev:latest
+    ports:
+      - "50051:50051"
+    volumes:
+      - $WORKSPACE:/app
+    # specify container name
+    container_name: $SERVICE_NAME 
+    # environment file
+    env_file:
+      - .env
