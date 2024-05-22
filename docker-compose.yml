@@ -6,6 +6,7 @@ services:
       context: .
     # specify the image name after builded
     image: go-docker-dev:latest
+    restart: always
     ports:
       - "50051:50051"
     volumes:
@@ -15,3 +16,8 @@ services:
     # environment file
     env_file:
       - .env
+    healthcheck:
+      test: $TEST_COMMAND
+      interval: 3s
+      timeout: 1s
+      retries: 3
